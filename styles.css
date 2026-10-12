@@ -1,0 +1,632 @@
+/* =========================================================
+   GameVerse - MOBILE FIRST
+   Base styles below target phones (320px and up). Wider
+   layouts are added with min-width queries at the bottom:
+     600px  = large phone / small tablet
+     900px  = tablet landscape / desktop
+     1200px = large desktop
+   ========================================================= */
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #050507;
+  --surface: #0c0d11;
+  --border: #1d1f27;
+  --red: #ff2d4d;
+  --red-dark: #c21234;
+  --text: #f2f3f7;
+  --text-dim: #9a9eab;
+  --font-display: "Rajdhani", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Side padding grows with the screen; safe-area keeps content off notches */
+  --gutter: clamp(16px, 5vw, 52px);
+  --pad-l: max(var(--gutter), env(safe-area-inset-left));
+  --pad-r: max(var(--gutter), env(safe-area-inset-right));
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;   /* stop iOS auto-enlarging text in landscape */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 15px/1.6 var(--font-body);   /* 15px base: readable on phones */
+  -webkit-tap-highlight-color: transparent;
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, p { margin: 0; }
+img { max-width: 100%; }
+.icon { width: 16px; height: 16px; flex: none; }
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.container {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  padding-inline: var(--pad-l) var(--pad-r);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;                      /* comfortable thumb target */
+  padding: 14px 22px;
+  font: 600 13px/1 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn--sm { min-height: 40px; padding: 10px 18px; font-size: 12px; }
+.btn--solid { background: linear-gradient(180deg, var(--red), var(--red-dark)); color: #fff; }
+.btn:active { transform: scale(.98); }   /* pressed feedback on touch */
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px var(--pad-r) 10px var(--pad-l);
+  padding-top: max(10px, env(safe-area-inset-top));
+  background: rgba(5, 5, 7, .9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.logo { display: inline-flex; align-items: center; gap: 8px; }
+.logo__mark { width: 30px; height: 30px; color: var(--red); filter: drop-shadow(0 0 6px rgba(255, 45, 77, .6)); }
+.logo__text { display: flex; flex-direction: column; font: 700 18px/1 var(--font-display); letter-spacing: .06em; }
+.logo__text small { font-size: 9px; letter-spacing: .3em; color: var(--red); font-weight: 600; }
+
+/* ---------- Hero (stacked: text first, image below) ---------- */
+.hero {
+  display: grid;
+  gap: 28px;
+  padding: 24px var(--pad-r) 40px var(--pad-l);
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 85%, rgba(255, 45, 77, .25), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 70% 70%, rgba(47, 208, 255, .12), transparent 70%),
+    var(--bg);
+  overflow: hidden;
+}
+
+.eyebrow {
+  margin-bottom: 14px;
+  font: 600 11px/1.5 var(--font-body);
+  letter-spacing: .14em;               /* long text, so tracking is tighter than desktop */
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* Fluid headline: ~44px on a 340px phone, caps at 84px on desktop */
+.hero__title {
+  font: 700 clamp(44px, 14vw, 84px)/.95 var(--font-display);
+  text-transform: uppercase;
+}
+.glitch { display: block; }
+.glitch--white { color: #fff; text-shadow: 2px 0 0 rgba(255, 45, 77, .6), -2px 0 0 rgba(47, 208, 255, .5); }
+.glitch--red { color: var(--red); text-shadow: 0 0 20px rgba(255, 45, 77, .6), 2px 0 0 rgba(47, 208, 255, .35); }
+
+.hero__lead {
+  margin: 20px 0 24px;
+  color: var(--text-dim);
+  font-size: 15px;
+}
+
+.hero__cta { display: flex; }
+.hero__cta .btn { flex: 1; }             /* full-width CTA on phones */
+
+.hero__visual { display: flex; justify-content: center; }
+.hero__visual img {
+  display: block;
+  width: min(100%, 340px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(255, 45, 77, .45));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 50% { transform: translateY(-8px); } }
+
+/* ---------- Section heading + link ---------- */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font: 700 16px/1 var(--font-display);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.section-title::before { content: ""; width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); }
+
+.link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 8px;
+  font: 600 12px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* Placeholder art blocks (replace with real images) */
+.art--red    { background: radial-gradient(circle at 50% 30%, rgba(255, 45, 77, .55), transparent 65%), linear-gradient(160deg, #2a0a14, #0a0508); }
+.art--grey   { background: radial-gradient(circle at 50% 30%, rgba(160, 160, 170, .3), transparent 65%), linear-gradient(160deg, #1c1d22, #08080a); }
+.art--purple { background: radial-gradient(circle at 50% 30%, rgba(150, 70, 255, .5), transparent 65%), linear-gradient(160deg, #1d0f3a, #07050d); }
+
+/* ---------- Featured games ---------- */
+.games { padding-bottom: 40px; }
+
+
+  .cards-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+      color: #222222;
+    }
+
+    .card-content p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #666666;
+      margin-bottom: 20px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      padding: 11px 18px;
+      background: #2563eb;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .card-btn:hover {
+      background: #1d4ed8;
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .cards-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card img {
+        height: 220px;
+      }
+
+      .card-content {
+        padding: 18px;
+      }
+
+      .card-content h3 {
+        font-size: 19px;
+      }
+    }
+/* Phone: a single column of compact horizontal cards */
+
+/* ---------- Booking form ---------- */
+.booking-section {
+  padding: 56px var(--pad-r) 0 var(--pad-l);
+  scroll-margin-top: 80px;
+}
+
+.booking-panel {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  padding: clamp(22px, 5vw, 40px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #101116, var(--surface));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .25);
+}
+
+.booking-panel h2 {
+  font: 700 clamp(28px, 6vw, 40px)/1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.booking-description {
+  margin-top: 10px;
+  color: var(--text-dim);
+}
+
+.booking-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.booking-field {
+  display: grid;
+  gap: 8px;
+}
+
+.booking-field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.booking-field input,
+.booking-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #08090c;
+  color: var(--text);
+  font: inherit;
+}
+
+.booking-field input:focus-visible,
+.booking-field select:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.booking-field select:invalid {
+  color: var(--text-dim);
+}
+
+.booking-submit {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.booking-message {
+  grid-column: 1 / -1;
+  min-height: 1.5em;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.booking-success {
+  width: min(calc(100% - 32px), 440px);
+  padding: 0;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+}
+
+.booking-success::backdrop {
+  background: rgba(0, 0, 0, .75);
+  backdrop-filter: blur(4px);
+}
+
+.booking-success__content {
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+}
+
+.booking-success__content h2 {
+  font: 700 clamp(28px, 7vw, 36px)/1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.booking-success__content > p:not(.eyebrow) {
+  color: var(--text-dim);
+}
+
+.booking-success__content .btn {
+  justify-self: start;
+}
+
+.admin-main {
+  min-height: calc(100vh - 220px);
+  padding: 56px var(--pad-r) 0 var(--pad-l);
+}
+
+.contact-main {
+  min-height: calc(100vh - 220px);
+  padding: 56px var(--pad-r) 64px var(--pad-l);
+}
+
+.contact-panel {
+  width: min(100%, 900px);
+  margin-inline: auto;
+  padding: clamp(22px, 5vw, 44px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #101116, var(--surface));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .25);
+}
+
+.contact-panel h1 {
+  font: 700 clamp(36px, 8vw, 56px)/1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.contact-intro {
+  max-width: 680px;
+  margin-top: 16px;
+  color: var(--text-dim);
+}
+
+.contact-section-title {
+  margin-top: 36px;
+  font: 700 24px/1.2 var(--font-display);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.contact-partners {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.contact-partner {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #08090c;
+}
+
+.contact-partner h3 {
+  font: 700 22px/1.2 var(--font-display);
+}
+
+.contact-partner p {
+  margin-top: 4px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.contact-partner a {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.contact-booking {
+  margin-top: 28px;
+}
+
+.admin-panel {
+  width: min(100%, 1000px);
+}
+
+.admin-panel h1 {
+  font: 700 clamp(28px, 6vw, 40px)/1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.admin-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-notice,
+.admin-back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.admin-back-link {
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.booking-table-wrap {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.booking-table th {
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.booking-table td {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 600px) {
+  .contact-partners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-submit {
+    grid-column: 1 / -1;
+    justify-self: start;
+    width: auto;
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;         /* two link columns side by side */
+  gap: 24px 16px;
+  padding: 32px var(--pad-r) max(28px, env(safe-area-inset-bottom)) var(--pad-l);
+  border-top: 1px solid var(--border);
+}
+.site-footer .logo { grid-column: 1 / -1; }
+
+.footer-col { display: flex; flex-direction: column; gap: 4px; }
+.footer-col h4 { margin-bottom: 6px; font: 600 12px/1 var(--font-body); letter-spacing: .15em; text-transform: uppercase; color: var(--text-dim); }
+.footer-col a { display: inline-block; padding: 8px 0; font-size: 14px; color: var(--text); }   /* 8px padding = bigger tap area */
+
+.copyright {
+  grid-column: 1 / -1;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Hover only where a real pointer exists, so touch screens never get stuck hover states */
+@media (hover: hover) {
+  .btn--solid:hover { transform: translateY(-1px); box-shadow: 0 0 18px rgba(255, 45, 77, .55); }
+  .link-more { transition: color .2s, gap .2s; }
+  .link-more:hover { color: var(--red); gap: 12px; }
+  .game-card:hover { border-color: var(--red); box-shadow: 0 0 16px rgba(255, 45, 77, .3); transform: translateY(-3px); }
+  .footer-col a { transition: color .2s; }
+  .footer-col a:hover { color: var(--red); }
+}
+
+/* =========================================================
+   600px and up: large phones, small tablets
+   ========================================================= */
+@media (min-width: 600px) {
+  body { font-size: 16px; }
+
+  .hero { padding-block: 40px 56px; }
+  .hero__lead { max-width: 520px; font-size: 16px; }
+  .hero__cta .btn { flex: 0 0 auto; }      /* CTA shrinks to its content */
+  .hero__visual img { width: min(100%, 420px); }
+
+  /* Games become 2-up vertical cards */
+  .games__grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .game-card {
+    display: block;
+    padding: 8px 8px 16px;
+  }
+  .game-card__art { aspect-ratio: 1 / .85; margin-bottom: 12px; }
+  .game-card h3, .game-card p { padding-inline: 8px; }
+  .game-card__go { position: absolute; right: 14px; bottom: 16px; }
+
+  /* Footer: logo left, links right */
+  .site-footer { grid-template-columns: 1.4fr 1fr 1fr; align-items: start; }
+  .site-footer .logo { grid-column: auto; }
+  .copyright { text-align: left; }
+}
+
+/* =========================================================
+   900px and up: tablet landscape / desktop
+   ========================================================= */
+@media (min-width: 900px) {
+  .site-header { padding-block: 14px; }
+
+  /* Hero switches to two columns: copy left, image right */
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    min-height: 560px;
+    background:
+      radial-gradient(ellipse 45% 55% at 75% 50%, rgba(255, 45, 77, .22), transparent 70%),
+      radial-gradient(ellipse 35% 45% at 82% 30%, rgba(47, 208, 255, .12), transparent 70%),
+      var(--bg);
+  }
+  .hero__visual img { width: min(100%, 520px); }
+
+  .section-title { font-size: 18px; margin-bottom: 20px; }
+  .games { padding-bottom: 64px; }
+  .games__grid { grid-template-columns: repeat(4, 1fr); }   /* all four cards in a row */
+
+  .site-footer {
+    width: min(100%, 1100px);
+    margin-inline: auto;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* =========================================================
+   1200px and up: large desktop
+   ========================================================= */
+@media (min-width: 1200px) {
+  /* Line the hero up with the 1100px content column used by the games and footer */
+  .hero { padding-inline: calc((100vw - 1100px) / 2 + var(--gutter)); }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hero__visual img { animation: none; }
+  * { transition: none !important; }
+}

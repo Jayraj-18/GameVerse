@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport-fit=cover lets the layout respect notches via env(safe-area-inset-*) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050507">
+  <title>GameVerse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Shared SVG symbols (the logo mark and arrow icon reference these) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="logo-mark" viewBox="0 0 40 40">
+        <path d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="arrow" viewBox="0 0 16 16">
+        <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <a href="#" class="logo" aria-label="GameVerse home">
+      <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
+    <span class="logo__text">GAME<small>VERSE</small></span>
+    </a>
+
+    <div class="header-actions">
+      <a href="login.html" class="btn btn--solid btn--sm">Admin</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="eyebrow">GameVerse – Enter the World of Virtual Reality</p>
+        <h1 class="hero__title">
+          <span class="glitch glitch--white">Dominate</span>
+          <span class="glitch glitch--red">The Arena</span>
+        </h1>
+        <p class="hero__lead">Gateway to a world of gaming and virtual adventures. Experience the excitement of virtual reality without buying an expensive headset. Book and rent VR headsets to enjoy immersive games, explore incredible virtual worlds, and create unforgettable memories</p>
+        <div class="hero__cta">
+          <a href="#booking-form" class="btn btn--solid">Book Your Slot Now <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Your own image goes here (console.png) -->
+      <div class="hero__visual">
+        <img src="console.png" alt="" width="520" height="520" decoding="async">
+      </div>
+    </section>
+
+    <!-- ============ Featured games ============ -->
+  <div class="cards-container">
+
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
+        alt="Gaming setup with colorful lights"
+        loading="lazy"
+      >
+      <div class="card-content">
+        <h3>Gaming Experience</h3>
+        <p>Explore exciting games and enjoy an immersive gaming experience.</p>
+        <a href="#booking-form" class="card-btn">Book Now</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600"
+        alt="Virtual reality headset"
+        loading="lazy"
+      >
+      <div class="card-content">
+        <h3>Virtual Reality</h3>
+        <p>Step into virtual worlds and discover a new way to play.</p>
+        <a href="#booking-form" class="card-btn">Book Now</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600"
+        alt="Gaming equipment on a desk"
+        loading="lazy"
+      >
+      <div class="card-content">
+        <h3>Premium Games</h3>
+        <p>Discover engaging games designed for fun and entertainment.</p>
+        <a href="#booking-form" class="card-btn">Book Now</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600"
+        alt="Person enjoying video games"
+        loading="lazy"
+      >
+      <div class="card-content">
+        <h3>Fun for Everyone</h3>
+        <p>Make every gaming session memorable with friends and family.</p>
+        <a href="#booking-form" class="card-btn">Book Now</a>
+      </div>
+    </div>
+
+  </div>
+
+    <section class="booking-section" id="booking-form" aria-labelledby="booking-title">
+      <div class="booking-panel">
+        <p class="eyebrow">Plan your session</p>
+        <h2 id="booking-title">Book Your VR Slot</h2>
+        <p class="booking-description">Choose a time and session length for your gaming experience.</p>
+
+        <form class="booking-form">
+          <div class="booking-field">
+            <label for="booking-name">Name</label>
+            <input id="booking-name" name="name" type="text" autocomplete="name" required>
+          </div>
+
+          <div class="booking-field">
+            <label for="booking-address">Address</label>
+            <input id="booking-address" name="address" type="text" autocomplete="street-address" required>
+          </div>
+
+          <div class="booking-field">
+            <label for="booking-time">Time slot</label>
+            <select id="booking-time" name="timeslot" required>
+              <option value="" disabled selected>Select a time</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="13:00">1:00 PM</option>
+              <option value="14:00">2:00 PM</option>
+              <option value="15:00">3:00 PM</option>
+              <option value="16:00">4:00 PM</option>
+              <option value="17:00">5:00 PM</option>
+              <option value="18:00">6:00 PM</option>
+            </select>
+          </div>
+
+          <div class="booking-field">
+            <label for="booking-duration">Session duration</label>
+            <select id="booking-duration" name="duration" required>
+              <option value="" disabled selected>Select a duration</option>
+              <option value="1-hour">1 hour</option>
+              <option value="1-hour-30-minutes">1 hour 30 minutes</option>
+              <option value="2-hours">2 hours</option>
+            </select>
+          </div>
+
+          <button class="btn btn--solid booking-submit" type="submit">Request a Booking</button>
+          <p class="booking-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <dialog class="booking-success" id="booking-success" aria-labelledby="booking-success-title">
+    <div class="booking-success__content">
+      <p class="eyebrow">Booking received</p>
+      <h2 id="booking-success-title">Booking Successful!</h2>
+      <p>Your booking has been saved. We look forward to seeing you!</p>
+      <button class="btn btn--solid" id="booking-success-close" type="button">Done</button>
+    </div>
+  </dialog>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <a href="#" class="logo" aria-label="GameVerse home">
+      <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
+      <span class="logo__text">GAME<small>VERSE</small></span>
+    </a>
+
+  
+
+    <nav class="footer-col" aria-label="Support">
+      <h4>Support</h4>
+      <a href="contactus.html">Contact Us</a>
+    </nav>
+
+    <p class="copyright">&copy; 2026 GameVerse. All Rights Reserved.</p>
+  </footer>
+
+  <script src="booking.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050507">
+  <title>Admin Login | GameVerse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo" aria-label="GameVerse home">
+      <svg class="logo__mark" aria-hidden="true" viewBox="0 0 40 40"><path d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z" fill="currentColor"/></svg>
+     <span class="logo__text">GAME<small>VERSE</small></span>
+    </a>
+    <a href="index.html" class="btn btn--solid btn--sm">Back to site</a>
+  </header>
+
+  <main class="admin-main">
+    <section class="booking-panel admin-panel" aria-labelledby="admin-title">
+      <div id="login-view">
+        <p class="eyebrow">Admin access</p>
+        <h1 id="admin-title">Admin Login</h1>
+        <p class="booking-description">Sign in to view submitted bookings.</p>
+        <form class="booking-form" id="admin-login">
+          <div class="booking-field">
+            <label for="admin-username">Username</label>
+            <input id="admin-username" name="username" type="text" autocomplete="username" required>
+          </div>
+          <div class="booking-field">
+            <label for="admin-password">Password</label>
+            <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn--solid booking-submit" type="submit">Log In</button>
+          <p class="booking-message" id="login-message" role="alert" aria-live="polite"></p>
+        </form>
+        <p class="admin-notice">Demo login only: this static-site login is not secure for production use.</p>
+      </div>
+
+      <div id="bookings-view" hidden>
+        <div class="admin-heading">
+          <div>
+            <p class="eyebrow">Admin dashboard</p>
+            <h1 id="bookings-title">Bookings</h1>
+          </div>
+          <button class="btn btn--solid btn--sm" id="admin-logout" type="button">Log Out</button>
+        </div>
+        <p class="booking-description" id="booking-count"></p>
+        <p class="booking-message" id="bookings-message" role="status" aria-live="polite"></p>
+        <div class="booking-table-wrap">
+          <table class="booking-table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Time slot</th>
+                <th scope="col">Duration</th>
+              </tr>
+            </thead>
+            <tbody id="booking-rows"></tbody>
+          </table>
+        </div>
+        <a class="admin-back-link" href="index.html#booking-form">Create a booking</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="login.js" defer></script>
+</body>
+</html>
