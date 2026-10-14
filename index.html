@@ -1,139 +1,729 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- viewport-fit=cover lets the layout respect notches via env(safe-area-inset-*) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <meta name="theme-color" content="#050507">
-  <title>GameVerse</title>
+
+  <title>GameVerse | VR Gaming Experience</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
 
-  <!-- Shared SVG symbols (the logo mark and arrow icon reference these) -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-display: "Rajdhani", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .hero-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero-float {
+        animation: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="m-0 bg-[#050507] text-[#f2f3f7] text-[15px] leading-[1.6]">
+
+  <!-- =====================================================
+       Shared SVG Symbols
+       ===================================================== -->
+
+  <svg
+    width="0"
+    height="0"
+    class="absolute"
+    aria-hidden="true"
+  >
     <defs>
+
+      <!-- Logo -->
       <symbol id="logo-mark" viewBox="0 0 40 40">
-        <path d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z" fill="currentColor"/>
+        <path
+          d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z"
+          fill="currentColor"
+        />
       </symbol>
+
+      <!-- Arrow -->
       <symbol id="arrow" viewBox="0 0 16 16">
-        <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path
+          d="M2 8h11M9 4l4 4-4 4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </symbol>
+
     </defs>
   </svg>
 
-  <!-- ============ Header ============ -->
-  <header class="site-header">
-    <a href="#" class="logo" aria-label="GameVerse home">
-      <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
-    <span class="logo__text">GAME<small>VERSE</small></span>
+
+  <!-- =====================================================
+       Header
+       ===================================================== -->
+
+  <header
+    class="sticky top-0 z-20 flex items-center justify-between gap-4
+           bg-[rgba(5,5,7,0.9)] px-[max(16px,env(safe-area-inset-left))]
+           pr-[max(16px,env(safe-area-inset-right))]
+           py-2.5 pt-[max(10px,env(safe-area-inset-top))]
+           backdrop-blur-[8px]"
+  >
+
+    <a
+      href="#"
+      class="inline-flex items-center gap-2"
+      aria-label="GameVerse home"
+    >
+
+      <!-- Logo Icon -->
+      <svg
+        class="h-[30px] w-[30px] flex-none text-[#ff2d4d]
+               drop-shadow-[0_0_6px_rgba(255,45,77,0.6)]"
+        aria-hidden="true"
+      >
+        <use href="#logo-mark"></use>
+      </svg>
+
+      <!-- Logo Text -->
+      <span
+        class="flex flex-col font-['Rajdhani'] text-[18px]
+               font-bold leading-none tracking-[0.06em]"
+      >
+        GAME
+
+        <small
+          class="text-[9px] font-semibold tracking-[0.3em] text-[#ff2d4d]"
+        >
+          VERSE
+        </small>
+      </span>
+
     </a>
 
   </header>
 
+
+  <!-- =====================================================
+       Main
+       ===================================================== -->
+
   <main>
 
-    <!-- ============ Hero ============ -->
-    <section class="hero">
-      <div class="hero__copy">
-        <p class="eyebrow">GameVerse – Enter the World of Virtual Reality</p>
-        <h1 class="hero__title">
-          <span class="glitch glitch--white">Dominate</span>
-          <span class="glitch glitch--red">The Arena</span>
+
+    <!-- =====================================================
+         Hero
+         ===================================================== -->
+
+    <section
+      class="grid gap-7 overflow-hidden
+             bg-[radial-gradient(ellipse_70%_40%_at_50%_85%,rgba(255,45,77,0.25),transparent_70%),radial-gradient(ellipse_50%_30%_at_70%_70%,rgba(47,208,255,0.12),transparent_70%),#050507]
+             px-[max(16px,env(safe-area-inset-left))]
+             pr-[max(16px,env(safe-area-inset-right))]
+             py-6 pb-10
+             min-[600px]:py-10 min-[600px]:pb-14
+             min-[900px]:min-h-[560px]
+             min-[900px]:grid-cols-2
+             min-[900px]:items-center
+             min-[900px]:gap-10
+             min-[900px]:bg-[radial-gradient(ellipse_45%_55%_at_75%_50%,rgba(255,45,77,0.22),transparent_70%),radial-gradient(ellipse_35%_45%_at_82%_30%,rgba(47,208,255,0.12),transparent_70%),#050507]
+             min-[1200px]:px-[calc((100vw-1100px)/2+max(16px,5vw))]"
+    >
+
+      <!-- Hero Content -->
+      <div>
+
+        <!-- Eyebrow -->
+        <p
+          class="mb-3.5 font-body text-[11px] font-semibold
+                 uppercase leading-[1.5] tracking-[0.14em] text-[#ff2d4d]"
+        >
+          GameVerse — Launching 24 October 2026
+        </p>
+
+
+        <!-- Hero Heading -->
+        <h1
+          class="font-display text-[clamp(44px,14vw,84px)]
+                 font-bold uppercase leading-[0.95]"
+        >
+
+          <span
+            class="block text-white
+                   [text-shadow:2px_0_0_rgba(255,45,77,0.6),-2px_0_0_rgba(47,208,255,0.5)]"
+          >
+            Dominate
+          </span>
+
+          <span
+            class="block text-[#ff2d4d]
+                   [text-shadow:0_0_20px_rgba(255,45,77,0.6),2px_0_0_rgba(47,208,255,0.35)]"
+          >
+            The Arena
+          </span>
+
         </h1>
-        <p class="hero__lead">Gateway to a world of gaming and virtual adventures. Experience the excitement of virtual reality without buying an expensive headset. Book and rent VR headsets to enjoy immersive games, explore incredible virtual worlds, and create unforgettable memories</p>
-        <div class="hero__cta">
-          <a href="#booking-form" class="btn btn--solid">Book Your Slot Now <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+
+
+        <!-- Hero Description -->
+        <p
+          class="my-5 mb-6 max-w-[520px] text-[15px]
+                 text-[#9a9eab] min-[600px]:text-[16px]"
+        >
+          GameVerse brings immersive virtual reality gaming to you without
+          the need to buy an expensive VR headset. Starting 24 October 2026,
+          book your session, rent a VR headset, jump into exciting virtual
+          worlds, and create unforgettable gaming memories.
+        </p>
+
+
+        <!-- Hero CTA -->
+        <div class="flex">
+
+          <a
+            href="#prebooking"
+            class="inline-flex min-h-12 flex-1 items-center
+                   justify-center gap-2.5 rounded border
+                   border-transparent
+                   bg-gradient-to-b from-[#ff2d4d] to-[#c21234]
+                   px-[22px] py-3.5
+                   text-[13px] font-semibold uppercase
+                   leading-none tracking-[0.08em] text-white
+                   transition duration-200
+                   hover:-translate-y-0.5
+                   hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+                   active:scale-[0.98]
+                   min-[600px]:flex-none"
+          >
+            Pre-Book Your VR Session
+
+            <svg
+              class="h-4 w-4 flex-none"
+              aria-hidden="true"
+            >
+              <use href="#arrow"></use>
+            </svg>
+
+          </a>
+
         </div>
+
       </div>
 
-      <!-- Your own image goes here (console.png) -->
-      <div class="hero__visual">
-        <img src="console.png" alt="" width="520" height="520" decoding="async">
+
+      <!-- Hero Image -->
+      <div class="flex justify-center">
+
+        <img
+          src="console.png"
+          alt="GameVerse virtual reality gaming experience"
+          width="520"
+          height="520"
+          decoding="async"
+          class="hero-float block h-auto w-full max-w-[340px]
+                 object-contain
+                 drop-shadow-[0_0_24px_rgba(255,45,77,0.45)]
+                 min-[600px]:max-w-[420px]
+                 min-[900px]:max-w-[520px]"
+        >
+
       </div>
+
     </section>
 
-    <!-- ============ Featured games ============ -->
-  <div class="cards-container">
 
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
-        alt="Gaming setup with colorful lights"
-        loading="lazy"
-      >
-      <div class="card-content">
-        <h3>Gaming Experience</h3>
-        <p>Explore exciting games and enjoy an immersive gaming experience.</p>
-        <a href="#booking-form" class="card-btn">Book Now</a>
+
+    <!-- =====================================================
+         Featured Gaming Experiences
+         ===================================================== -->
+
+    <section
+      class="px-[max(16px,env(safe-area-inset-left))]
+             pr-[max(16px,env(safe-area-inset-right))]
+             py-10 min-[900px]:py-16"
+      aria-labelledby="games-title"
+    >
+
+      <!-- Section Heading -->
+      <div class="mx-auto mb-5 max-w-[1100px]">
+
+        <h2
+          id="games-title"
+          class="flex items-center gap-2.5
+                 font-display text-base font-bold
+                 uppercase leading-none tracking-[0.12em]
+                 min-[900px]:text-lg"
+        >
+
+          <span
+            class="h-1.5 w-1.5 rotate-45 bg-[#ff2d4d]"
+            aria-hidden="true"
+          ></span>
+
+          Featured Gaming Experiences
+
+        </h2>
+
       </div>
-    </div>
 
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600"
-        alt="Virtual reality headset"
-        loading="lazy"
+
+      <!-- Cards -->
+      <div
+        class="mx-auto grid max-w-[1200px]
+               grid-cols-1 gap-5
+               min-[600px]:grid-cols-2
+               min-[900px]:grid-cols-4 min-[900px]:gap-6"
       >
-      <div class="card-content">
-        <h3>Virtual Reality</h3>
-        <p>Step into virtual worlds and discover a new way to play.</p>
-        <a href="#booking-form" class="card-btn">Book Now</a>
-      </div>
-    </div>
 
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600"
-        alt="Gaming equipment on a desk"
-        loading="lazy"
-      >
-      <div class="card-content">
-        <h3>Premium Games</h3>
-        <p>Discover engaging games designed for fun and entertainment.</p>
-        <a href="#booking-form" class="card-btn">Book Now</a>
-      </div>
-    </div>
 
-    <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600"
-        alt="Person enjoying video games"
-        loading="lazy"
-      >
-      <div class="card-content">
-        <h3>Fun for Everyone</h3>
-        <p>Make every gaming session memorable with friends and family.</p>
-        <a href="#booking-form" class="card-btn">Book Now</a>
-      </div>
-    </div>
+        <!-- Card 1 -->
+        <article
+          class="overflow-hidden rounded-[14px]
+                 bg-white shadow-[0_4px_15px_rgba(0,0,0,0.08)]
+                 transition duration-300
+                 hover:-translate-y-1.5
+                 hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
+        >
 
-  </div>
+          <img
+            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600"
+            alt="Gaming setup with colorful lights"
+            loading="lazy"
+            class="block h-[220px] w-full object-cover
+                   min-[600px]:h-[200px]"
+          >
 
-    <section class="booking-section" id="booking-form" aria-labelledby="booking-title">
-      <div class="booking-panel">
-        <p class="eyebrow">Plan your session</p>
-        <h2 id="booking-title">Book Your VR Slot</h2>
-        <p class="booking-description">Choose a time and session length for your gaming experience.</p>
+          <div class="p-[18px] min-[600px]:p-5">
 
-        <form class="booking-form">
-          <div class="booking-field">
-            <label for="booking-name">Name</label>
-            <input id="booking-name" name="name" type="text" autocomplete="name" required>
+            <h3
+              class="mb-3 text-[19px] font-bold text-[#222]
+                     min-[600px]:text-[21px]"
+            >
+              Gaming Experience
+            </h3>
+
+            <p
+              class="mb-5 text-[15px] leading-[1.6] text-[#666]"
+            >
+              Get ready for an exciting gaming session filled with immersive
+              gameplay, challenges, and unforgettable moments.
+            </p>
+
+            <a
+              href="#prebooking"
+              class="inline-block rounded-md bg-[#2563eb]
+                     px-[18px] py-[11px]
+                     text-sm text-white
+                     transition duration-300
+                     hover:bg-[#1d4ed8]"
+            >
+              Pre-Book Now
+            </a>
+
           </div>
 
-          <div class="booking-field">
-            <label for="booking-address">Address</label>
-            <input id="booking-address" name="address" type="text" autocomplete="street-address" required>
+        </article>
+
+
+
+        <!-- Card 2 -->
+        <article
+          class="overflow-hidden rounded-[14px]
+                 bg-white shadow-[0_4px_15px_rgba(0,0,0,0.08)]
+                 transition duration-300
+                 hover:-translate-y-1.5
+                 hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
+        >
+
+          <img
+            src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600"
+            alt="Virtual reality headset"
+            loading="lazy"
+            class="block h-[220px] w-full object-cover
+                   min-[600px]:h-[200px]"
+          >
+
+          <div class="p-[18px] min-[600px]:p-5">
+
+            <h3
+              class="mb-3 text-[19px] font-bold text-[#222]
+                     min-[600px]:text-[21px]"
+            >
+              Virtual Reality
+            </h3>
+
+            <p
+              class="mb-5 text-[15px] leading-[1.6] text-[#666]"
+            >
+              Step into immersive virtual worlds and experience gaming in a
+              completely new way with GameVerse VR.
+            </p>
+
+            <a
+              href="#prebooking"
+              class="inline-block rounded-md bg-[#2563eb]
+                     px-[18px] py-[11px]
+                     text-sm text-white
+                     transition duration-300
+                     hover:bg-[#1d4ed8]"
+            >
+              Pre-Book Now
+            </a>
+
           </div>
 
-          <div class="booking-field">
-            <label for="booking-time">Time slot</label>
-            <select id="booking-time" name="timeslot" required>
-              <option value="" disabled selected>Select a time</option>
+        </article>
+
+
+
+        <!-- Card 3 -->
+        <article
+          class="overflow-hidden rounded-[14px]
+                 bg-white shadow-[0_4px_15px_rgba(0,0,0,0.08)]
+                 transition duration-300
+                 hover:-translate-y-1.5
+                 hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
+        >
+
+          <img
+            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600"
+            alt="Gaming equipment on a desk"
+            loading="lazy"
+            class="block h-[220px] w-full object-cover
+                   min-[600px]:h-[200px]"
+          >
+
+          <div class="p-[18px] min-[600px]:p-5">
+
+            <h3
+              class="mb-3 text-[19px] font-bold text-[#222]
+                     min-[600px]:text-[21px]"
+            >
+              Premium Games
+            </h3>
+
+            <p
+              class="mb-5 text-[15px] leading-[1.6] text-[#666]"
+            >
+              Discover a selection of engaging games and experiences made
+              for exciting solo and group gaming sessions.
+            </p>
+
+            <a
+              href="#prebooking"
+              class="inline-block rounded-md bg-[#2563eb]
+                     px-[18px] py-[11px]
+                     text-sm text-white
+                     transition duration-300
+                     hover:bg-[#1d4ed8]"
+            >
+              Pre-Book Now
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- Card 4 -->
+        <article
+          class="overflow-hidden rounded-[14px]
+                 bg-white shadow-[0_4px_15px_rgba(0,0,0,0.08)]
+                 transition duration-300
+                 hover:-translate-y-1.5
+                 hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)]"
+        >
+
+          <img
+            src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=600"
+            alt="Person enjoying video games"
+            loading="lazy"
+            class="block h-[220px] w-full object-cover
+                   min-[600px]:h-[200px]"
+          >
+
+          <div class="p-[18px] min-[600px]:p-5">
+
+            <h3
+              class="mb-3 text-[19px] font-bold text-[#222]
+                     min-[600px]:text-[21px]"
+            >
+              Fun for Everyone
+            </h3>
+
+            <p
+              class="mb-5 text-[15px] leading-[1.6] text-[#666]"
+            >
+              Bring friends and family together for a fun-filled VR gaming
+              experience designed to make every session memorable.
+            </p>
+
+            <a
+              href="#prebooking"
+              class="inline-block rounded-md bg-[#2563eb]
+                     px-[18px] py-[11px]
+                     text-sm text-white
+                     transition duration-300
+                     hover:bg-[#1d4ed8]"
+            >
+              Pre-Book Now
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         Pre-Booking
+         ===================================================== -->
+
+    <section
+      id="prebooking"
+      aria-labelledby="prebooking-title"
+      class="scroll-mt-20
+             px-[max(16px,env(safe-area-inset-left))]
+             pr-[max(16px,env(safe-area-inset-right))]
+             pt-14 pb-0"
+    >
+
+      <div
+        class="mx-auto w-full max-w-[760px]
+               rounded-lg border border-[#1d1f27]
+               bg-gradient-to-br from-[#101116] to-[#0c0d11]
+               p-[clamp(22px,5vw,40px)]
+               shadow-[0_12px_36px_rgba(0,0,0,0.25)]"
+      >
+
+        <!-- Heading -->
+        <p
+          class="mb-3.5 text-[11px] font-semibold
+                 uppercase leading-[1.5] tracking-[0.14em]
+                 text-[#ff2d4d]"
+        >
+          Launching 24 October 2026
+        </p>
+
+        <h2
+          id="prebooking-title"
+          class="font-display text-[clamp(28px,6vw,40px)]
+                 font-bold uppercase leading-none text-[#f2f3f7]"
+        >
+          Pre-Book Your VR Experience
+        </h2>
+
+        <p
+          class="mt-2.5 text-[15px] leading-[1.6] text-[#9a9eab]"
+        >
+          GameVerse officially launches on 24 October 2026. Choose your
+          preferred date, time and session length below. Send us your request
+          and we'll contact you to confirm your VR experience.
+        </p>
+
+
+        <!-- Form -->
+        <form
+          id="prebooking-form"
+          class="mt-7 grid gap-[18px]
+                 min-[600px]:grid-cols-2"
+        >
+
+
+          <!-- Name -->
+          <div class="grid gap-2">
+
+            <label
+              for="booking-name"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Name
+            </label>
+
+            <input
+              id="booking-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              placeholder="Enter your name"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     placeholder:text-[#666a76]
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+          </div>
+
+
+          <!-- Phone -->
+          <div class="grid gap-2">
+
+            <label
+              for="booking-phone"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Phone Number
+            </label>
+
+            <input
+              id="booking-phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              placeholder="Enter your phone number"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     placeholder:text-[#666a76]
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+          </div>
+
+
+          <!-- Address -->
+          <div
+            class="grid gap-2 min-[600px]:col-span-2"
+          >
+
+            <label
+              for="booking-address"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Address
+            </label>
+
+            <input
+              id="booking-address"
+              name="address"
+              type="text"
+              autocomplete="street-address"
+              placeholder="Enter your address"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     placeholder:text-[#666a76]
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+          </div>
+
+
+          <!-- Date -->
+          <div class="grid gap-2">
+
+            <label
+              for="booking-date"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Preferred Date
+            </label>
+
+            <input
+              id="booking-date"
+              name="date"
+              type="date"
+              min="2026-10-24"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+          </div>
+
+
+          <!-- Time -->
+          <div class="grid gap-2">
+
+            <label
+              for="booking-time"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Preferred Time
+            </label>
+
+            <select
+              id="booking-time"
+              name="timeslot"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+              <option value="" disabled selected>
+                Select a time
+              </option>
+
               <option value="10:00">10:00 AM</option>
               <option value="11:00">11:00 AM</option>
               <option value="12:00">12:00 PM</option>
@@ -143,53 +733,269 @@
               <option value="16:00">4:00 PM</option>
               <option value="17:00">5:00 PM</option>
               <option value="18:00">6:00 PM</option>
+
             </select>
+
           </div>
 
-          <div class="booking-field">
-            <label for="booking-duration">Session duration</label>
-            <select id="booking-duration" name="duration" required>
-              <option value="" disabled selected>Select a duration</option>
-              <option value="1-hour">1 hour</option>
-              <option value="1-hour-30-minutes">1 hour 30 minutes</option>
-              <option value="2-hours">2 hours</option>
+
+          <!-- Duration -->
+          <div class="grid gap-2">
+
+            <label
+              for="booking-duration"
+              class="text-[13px] font-semibold text-[#f2f3f7]"
+            >
+              Session Duration
+            </label>
+
+            <select
+              id="booking-duration"
+              name="duration"
+              required
+              class="min-h-12 w-full rounded border
+                     border-[#1d1f27] bg-[#08090c]
+                     px-3.5 text-[15px] text-[#f2f3f7]
+                     outline-none
+                     focus:border-[#ff2d4d]
+                     focus:ring-2 focus:ring-[#ff2d4d]/30"
+            >
+
+              <option value="" disabled selected>
+                Select a duration
+              </option>
+
+              <option value="1-hour">
+                1 Hour
+              </option>
+
+              <option value="1-hour-30-minutes">
+                1 Hour 30 Minutes
+              </option>
+
+              <option value="2-hours">
+                2 Hours
+              </option>
+
             </select>
+
           </div>
 
-          <button class="btn btn--solid booking-submit" type="submit">Request a Booking</button>
-          <p class="booking-message" role="status" aria-live="polite"></p>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="mt-1.5 min-h-12 w-full cursor-pointer
+                   rounded border border-transparent
+                   bg-gradient-to-b from-[#ff2d4d] to-[#c21234]
+                   px-[22px] py-3.5
+                   text-[13px] font-semibold uppercase
+                   tracking-[0.08em] text-white
+                   transition duration-200
+                   hover:-translate-y-0.5
+                   hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+                   active:scale-[0.98]
+                   min-[600px]:col-span-2
+                   min-[600px]:w-auto
+                   min-[600px]:justify-self-start"
+          >
+            Submit Pre-Booking
+          </button>
+
+
+          <!-- Status -->
+          <p
+            id="booking-message"
+            role="status"
+            aria-live="polite"
+            class="min-h-6 text-[13px] text-[#9a9eab]
+                   min-[600px]:col-span-2"
+          ></p>
+
         </form>
+
+
+        <!-- Notice -->
+        <div
+          class="mt-6 border-t border-[#1d1f27]
+                 pt-5 text-xs leading-6 text-[#777b87]"
+        >
+
+          <p>
+            <span class="font-semibold text-[#f2f3f7]">
+              Launch Date:
+            </span>
+
+            GameVerse officially starts on 24 October 2026. Pre-booking
+            requests are subject to availability and will be confirmed
+            after we review your request and contact you.
+          </p>
+
+        </div>
+
       </div>
+
     </section>
 
   </main>
 
-  <dialog class="booking-success" id="booking-success" aria-labelledby="booking-success-title">
-    <div class="booking-success__content">
-      <p class="eyebrow">Booking received</p>
-      <h2 id="booking-success-title">Booking Successful!</h2>
-      <p>Your booking has been saved. We look forward to seeing you!</p>
-      <button class="btn btn--solid" id="booking-success-close" type="button">Done</button>
+
+
+  <!-- =====================================================
+       Booking Success Dialog
+       ===================================================== -->
+
+  <dialog
+    id="booking-success"
+    aria-labelledby="booking-success-title"
+    class="w-[calc(100%-32px)] max-w-[440px]
+           rounded-lg border border-[#ff2d4d]
+           bg-[#0c0d11] p-0 text-[#f2f3f7]
+           shadow-[0_20px_60px_rgba(0,0,0,0.6)]
+           backdrop:bg-black/75
+           backdrop:backdrop-blur-[4px]"
+  >
+
+    <div class="grid gap-4 p-7">
+
+      <p
+        class="mb-0 text-[11px] font-semibold
+               uppercase leading-[1.5] tracking-[0.14em]
+               text-[#ff2d4d]"
+      >
+        Pre-Booking Received
+      </p>
+
+      <h2
+        id="booking-success-title"
+        class="font-display text-[clamp(28px,7vw,36px)]
+               font-bold uppercase leading-none"
+      >
+        You're on the List!
+      </h2>
+
+      <p class="text-[15px] leading-[1.6] text-[#9a9eab]">
+        Your pre-booking request has been received. GameVerse launches on
+        24 October 2026. We'll contact you to confirm your VR session.
+      </p>
+
+      <button
+        class="inline-flex min-h-12
+               w-fit items-center justify-center
+               rounded border border-transparent
+               bg-gradient-to-b from-[#ff2d4d] to-[#c21234]
+               px-[22px] py-3.5
+               text-[13px] font-semibold uppercase
+               tracking-[0.08em] text-white
+               transition duration-200
+               hover:-translate-y-0.5
+               hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+               active:scale-[0.98]"
+        id="booking-success-close"
+        type="button"
+      >
+        Done
+      </button>
+
     </div>
+
   </dialog>
 
-  <!-- ============ Footer ============ -->
-  <footer class="site-footer">
-    <a href="#" class="logo" aria-label="GameVerse home">
-      <svg class="logo__mark" aria-hidden="true"><use href="#logo-mark"/></svg>
-      <span class="logo__text">GAME<small>VERSE</small></span>
+
+
+  <!-- =====================================================
+       Footer
+       ===================================================== -->
+
+  <footer
+    class="mt-[60px] grid grid-cols-2 gap-x-4 gap-y-6
+           border-t border-[#1d1f27]
+           px-[max(16px,env(safe-area-inset-left))]
+           pr-[max(16px,env(safe-area-inset-right))]
+           py-8 pb-[max(28px,env(safe-area-inset-bottom))]
+           min-[600px]:grid-cols-[1.4fr_1fr_1fr]
+           min-[600px]:items-start
+           min-[900px]:mx-auto
+           min-[900px]:w-full
+           min-[900px]:max-w-[1100px]
+           min-[900px]:grid-cols-[2fr_1fr_1fr]"
+  >
+
+    <!-- Footer Logo -->
+    <a
+      href="#"
+      class="col-span-2 inline-flex items-center gap-2
+             min-[600px]:col-span-1"
+      aria-label="GameVerse home"
+    >
+
+      <svg
+        class="h-[30px] w-[30px] flex-none text-[#ff2d4d]
+               drop-shadow-[0_0_6px_rgba(255,45,77,0.6)]"
+        aria-hidden="true"
+      >
+        <use href="#logo-mark"></use>
+      </svg>
+
+      <span
+        class="flex flex-col font-display text-[18px]
+               font-bold leading-none tracking-[0.06em]"
+      >
+        GAME
+
+        <small
+          class="text-[9px] font-semibold
+                 tracking-[0.3em] text-[#ff2d4d]"
+        >
+          VERSE
+        </small>
+
+      </span>
+
     </a>
 
-  
 
-    <nav class="footer-col" aria-label="Support">
-      <h4>Support</h4>
-      <a href="contactus.html">Contact Us</a>
+    <!-- Support -->
+    <nav
+      class="flex flex-col gap-1"
+      aria-label="Support"
+    >
+
+      <h4
+        class="mb-1.5 font-body text-xs font-semibold
+               uppercase leading-none tracking-[0.15em]
+               text-[#9a9eab]"
+      >
+        Support
+      </h4>
+
+      <a
+        href="contactus.html"
+        class="inline-block py-2 text-sm text-[#f2f3f7]
+               transition duration-200
+               hover:text-[#ff2d4d]"
+      >
+        Contact Us
+      </a>
+
     </nav>
 
-    <p class="copyright">&copy; 2026 GameVerse. All Rights Reserved.</p>
+
+    <!-- Copyright -->
+    <p
+      class="col-span-2 border-t border-[#1d1f27]
+             pt-5 text-center text-xs text-[#9a9eab]
+             min-[600px]:text-left"
+    >
+      &copy; 2026 GameVerse. Launching 24 October 2026. All Rights Reserved.
+    </p>
+
   </footer>
 
+
+  <!-- Booking JavaScript -->
   <script src="booking.js" defer></script>
+
 </body>
 </html>
+```

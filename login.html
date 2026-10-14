@@ -2,72 +2,810 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <meta name="theme-color" content="#050507">
+
   <title>Admin Login | GameVerse</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-display: "Rajdhani", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
-<body>
-  <header class="site-header">
-    <a href="index.html" class="logo" aria-label="GameVerse home">
-      <svg class="logo__mark" aria-hidden="true" viewBox="0 0 40 40"><path d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z" fill="currentColor"/></svg>
-     <span class="logo__text">GAME<small>VERSE</small></span>
+
+<body
+  class="m-0 min-h-screen bg-[#050507] text-[15px]
+         leading-[1.6] text-[#f2f3f7]"
+>
+
+  <!-- =====================================================
+       Header
+       ===================================================== -->
+
+  <header
+    class="sticky top-0 z-20 flex items-center
+           justify-between gap-4
+           border-b border-[#1d1f27]
+           bg-[rgba(5,5,7,0.9)]
+           px-[max(16px,env(safe-area-inset-left))]
+           pr-[max(16px,env(safe-area-inset-right))]
+           py-2.5
+           pt-[max(10px,env(safe-area-inset-top))]
+           backdrop-blur-[8px]"
+  >
+
+    <!-- Logo -->
+
+    <a
+      href="index.html"
+      class="inline-flex items-center gap-2"
+      aria-label="GameVerse home"
+    >
+
+      <svg
+        class="h-[30px] w-[30px] flex-none
+               text-[#ff2d4d]
+               drop-shadow-[0_0_6px_rgba(255,45,77,0.6)]"
+        aria-hidden="true"
+        viewBox="0 0 40 40"
+      >
+
+        <path
+          d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z"
+          fill="currentColor"
+        />
+
+      </svg>
+
+
+      <span
+        class="flex flex-col
+               font-display text-[18px]
+               font-bold leading-none
+               tracking-[0.06em]"
+      >
+
+        GAME
+
+        <small
+          class="text-[9px]
+                 font-semibold
+                 tracking-[0.3em]
+                 text-[#ff2d4d]"
+        >
+          VERSE
+        </small>
+
+      </span>
+
     </a>
-    <a href="index.html" class="btn btn--solid btn--sm">Back to site</a>
+
+
+    <!-- Back Button -->
+
+    <a
+      href="index.html"
+      class="inline-flex min-h-10
+             items-center justify-center
+             rounded border border-transparent
+             bg-gradient-to-b
+             from-[#ff2d4d] to-[#c21234]
+             px-[18px] py-2.5
+             text-[12px]
+             font-semibold uppercase
+             leading-none
+             tracking-[0.08em]
+             text-white
+             transition duration-200
+             hover:-translate-y-0.5
+             hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+             active:scale-[0.98]"
+    >
+      Back to Site
+    </a>
+
   </header>
 
-  <main class="admin-main">
-    <section class="booking-panel admin-panel" aria-labelledby="admin-title">
+
+
+  <!-- =====================================================
+       Main
+       ===================================================== -->
+
+  <main
+    class="min-h-[calc(100vh-220px)]
+           px-[max(16px,env(safe-area-inset-left))]
+           pr-[max(16px,env(safe-area-inset-right))]
+           py-14 pb-16"
+  >
+
+    <!-- =====================================================
+         Admin Panel
+         ===================================================== -->
+
+    <section
+      class="mx-auto w-full max-w-[1000px]
+             rounded-lg
+             border border-[#1d1f27]
+             bg-gradient-to-br
+             from-[#101116] to-[#0c0d11]
+             p-[clamp(22px,5vw,44px)]
+             shadow-[0_12px_36px_rgba(0,0,0,0.25)]"
+      aria-labelledby="admin-title"
+    >
+
+
+      <!-- =================================================
+           LOGIN VIEW
+           ================================================= -->
+
       <div id="login-view">
-        <p class="eyebrow">Admin access</p>
-        <h1 id="admin-title">Admin Login</h1>
-        <p class="booking-description">Sign in to view submitted bookings.</p>
-        <form class="booking-form" id="admin-login">
-          <div class="booking-field">
-            <label for="admin-username">Username</label>
-            <input id="admin-username" name="username" type="text" autocomplete="username" required>
+
+        <!-- Eyebrow -->
+
+        <p
+          class="mb-3.5
+                 text-[11px]
+                 font-semibold
+                 uppercase
+                 leading-[1.5]
+                 tracking-[0.14em]
+                 text-[#ff2d4d]"
+        >
+          Admin Access
+        </p>
+
+
+        <!-- Heading -->
+
+        <h1
+          id="admin-title"
+          class="font-display
+                 text-[clamp(36px,8vw,56px)]
+                 font-bold
+                 uppercase
+                 leading-none
+                 text-[#f2f3f7]"
+        >
+          Admin Login
+        </h1>
+
+
+        <!-- Description -->
+
+        <p
+          class="mt-4
+                 max-w-[680px]
+                 text-[15px]
+                 leading-[1.6]
+                 text-[#9a9eab]"
+        >
+          Sign in to view and manage submitted pre-booking requests.
+        </p>
+
+
+        <!-- Login Form -->
+
+        <form
+          class="mt-7 grid gap-[18px]
+                 min-[600px]:grid-cols-2"
+          id="admin-login"
+        >
+
+
+          <!-- Username -->
+
+          <div class="grid gap-2">
+
+            <label
+              for="admin-username"
+              class="text-[13px]
+                     font-semibold
+                     text-[#f2f3f7]"
+            >
+              Username
+            </label>
+
+            <input
+              id="admin-username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              placeholder="Enter username"
+              required
+              class="min-h-12
+                     w-full
+                     rounded
+                     border border-[#1d1f27]
+                     bg-[#08090c]
+                     px-3.5
+                     text-[15px]
+                     text-[#f2f3f7]
+                     outline-none
+                     placeholder:text-[#666a76]
+                     focus:border-[#ff2d4d]
+                     focus:ring-2
+                     focus:ring-[#ff2d4d]/30"
+            >
+
           </div>
-          <div class="booking-field">
-            <label for="admin-password">Password</label>
-            <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+
+
+          <!-- Password -->
+
+          <div class="grid gap-2">
+
+            <label
+              for="admin-password"
+              class="text-[13px]
+                     font-semibold
+                     text-[#f2f3f7]"
+            >
+              Password
+            </label>
+
+            <input
+              id="admin-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter password"
+              required
+              class="min-h-12
+                     w-full
+                     rounded
+                     border border-[#1d1f27]
+                     bg-[#08090c]
+                     px-3.5
+                     text-[15px]
+                     text-[#f2f3f7]
+                     outline-none
+                     placeholder:text-[#666a76]
+                     focus:border-[#ff2d4d]
+                     focus:ring-2
+                     focus:ring-[#ff2d4d]/30"
+            >
+
           </div>
-          <button class="btn btn--solid booking-submit" type="submit">Log In</button>
-          <p class="booking-message" id="login-message" role="alert" aria-live="polite"></p>
+
+
+          <!-- Login Button -->
+
+          <button
+            class="mt-1.5
+                   inline-flex
+                   min-h-12
+                   w-full
+                   cursor-pointer
+                   items-center
+                   justify-center
+                   rounded
+                   border border-transparent
+                   bg-gradient-to-b
+                   from-[#ff2d4d] to-[#c21234]
+                   px-[22px]
+                   py-3.5
+                   text-[13px]
+                   font-semibold
+                   uppercase
+                   leading-none
+                   tracking-[0.08em]
+                   text-white
+                   transition duration-200
+                   hover:-translate-y-0.5
+                   hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+                   active:scale-[0.98]
+                   min-[600px]:col-span-2
+                   min-[600px]:w-auto
+                   min-[600px]:justify-self-start"
+            type="submit"
+          >
+            Log In
+          </button>
+
+
+          <!-- Login Message -->
+
+          <p
+            class="min-h-6
+                   text-[13px]
+                   text-[#9a9eab]
+                   min-[600px]:col-span-2"
+            id="login-message"
+            role="alert"
+            aria-live="polite"
+          ></p>
+
         </form>
-        <p class="admin-notice">Demo login only: this static-site login is not secure for production use.</p>
+
+
+        <!-- Demo Notice -->
+
+        <div
+          class="mt-6
+                 rounded
+                 border border-[#1d1f27]
+                 bg-[#08090c]
+                 p-4
+                 text-xs
+                 leading-6
+                 text-[#777b87]"
+        >
+
+          <p>
+            <span
+              class="font-semibold
+                     text-[#f2f3f7]"
+            >
+              Demo Login:
+            </span>
+
+            This static-site login is not secure for production use.
+            Use server-side authentication before deploying this
+            admin system publicly.
+
+          </p>
+
+        </div>
+
       </div>
+
+
+
+      <!-- =================================================
+           BOOKINGS DASHBOARD
+           ================================================= -->
 
       <div id="bookings-view" hidden>
-        <div class="admin-heading">
+
+
+        <!-- Dashboard Header -->
+
+        <div
+          class="flex
+                 flex-col
+                 items-start
+                 justify-between
+                 gap-5
+                 min-[600px]:flex-row
+                 min-[600px]:items-center"
+        >
+
           <div>
-            <p class="eyebrow">Admin dashboard</p>
-            <h1 id="bookings-title">Bookings</h1>
+
+            <p
+              class="mb-3.5
+                     text-[11px]
+                     font-semibold
+                     uppercase
+                     leading-[1.5]
+                     tracking-[0.14em]
+                     text-[#ff2d4d]"
+            >
+              Admin Dashboard
+            </p>
+
+            <h1
+              id="bookings-title"
+              class="font-display
+                     text-[clamp(28px,6vw,40px)]
+                     font-bold
+                     uppercase
+                     leading-none"
+            >
+              Bookings
+            </h1>
+
           </div>
-          <button class="btn btn--solid btn--sm" id="admin-logout" type="button">Log Out</button>
+
+
+          <!-- Logout -->
+
+          <button
+            class="inline-flex
+                   min-h-10
+                   items-center
+                   justify-center
+                   rounded
+                   border border-transparent
+                   bg-gradient-to-b
+                   from-[#ff2d4d]
+                   to-[#c21234]
+                   px-[18px]
+                   py-2.5
+                   text-[12px]
+                   font-semibold
+                   uppercase
+                   leading-none
+                   tracking-[0.08em]
+                   text-white
+                   transition duration-200
+                   hover:-translate-y-0.5
+                   hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
+                   active:scale-[0.98]"
+            id="admin-logout"
+            type="button"
+          >
+            Log Out
+          </button>
+
         </div>
-        <p class="booking-description" id="booking-count"></p>
-        <p class="booking-message" id="bookings-message" role="status" aria-live="polite"></p>
-        <div class="booking-table-wrap">
-          <table class="booking-table">
+
+
+        <!-- Booking Count -->
+
+        <p
+          class="mt-4
+                 text-[15px]
+                 text-[#9a9eab]"
+          id="booking-count"
+        ></p>
+
+
+        <!-- Dashboard Message -->
+
+        <p
+          class="mt-2
+                 min-h-6
+                 text-[13px]
+                 text-[#9a9eab]"
+          id="bookings-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+
+        <!-- =================================================
+             Booking Table
+             ================================================= -->
+
+        <div
+          class="mt-5
+                 w-full
+                 overflow-x-auto
+                 rounded
+                 border border-[#1d1f27]"
+        >
+
+          <table
+            class="w-full
+                   min-w-[900px]
+                   border-collapse
+                   text-left"
+          >
+
             <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Time slot</th>
-                <th scope="col">Duration</th>
+
+              <tr
+                class="bg-[#08090c]"
+              >
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Name
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Phone
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Address
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Date
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Time
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Duration
+                </th>
+
+                <th
+                  scope="col"
+                  class="border-b
+                         border-[#1d1f27]
+                         px-3
+                         py-3
+                         text-xs
+                         font-semibold
+                         uppercase
+                         tracking-[0.08em]
+                         text-[#9a9eab]"
+                >
+                  Players
+                </th>
+
               </tr>
+
             </thead>
-            <tbody id="booking-rows"></tbody>
+
+
+            <!-- JavaScript inserts booking rows here -->
+
+            <tbody
+              id="booking-rows"
+              class="divide-y divide-[#1d1f27]"
+            ></tbody>
+
           </table>
+
         </div>
-        <a class="admin-back-link" href="index.html#booking-form">Create a booking</a>
+
+
+        <!-- Back Link -->
+
+        <a
+          class="mt-5
+                 inline-block
+                 text-sm
+                 font-semibold
+                 text-[#9a9eab]
+                 underline
+                 decoration-[#9a9eab]
+                 underline-offset-4
+                 transition duration-200
+                 hover:text-[#ff2d4d]
+                 hover:decoration-[#ff2d4d]"
+          href="index.html#prebooking"
+        >
+          Create a Pre-Booking
+        </a>
+
       </div>
+
     </section>
+
   </main>
 
+
+
+  <!-- =====================================================
+       Footer
+       ===================================================== -->
+
+  <footer
+    class="mt-[60px]
+           grid
+           grid-cols-2
+           gap-x-4
+           gap-y-6
+           border-t
+           border-[#1d1f27]
+           px-[max(16px,env(safe-area-inset-left))]
+           pr-[max(16px,env(safe-area-inset-right))]
+           py-8
+           pb-[max(28px,env(safe-area-inset-bottom))]
+           min-[600px]:grid-cols-[1.4fr_1fr_1fr]
+           min-[900px]:mx-auto
+           min-[900px]:w-full
+           min-[900px]:max-w-[1100px]
+           min-[900px]:grid-cols-[2fr_1fr_1fr]"
+  >
+
+    <!-- Footer Logo -->
+
+    <a
+      href="index.html"
+      class="col-span-2
+             inline-flex
+             items-center
+             gap-2
+             min-[600px]:col-span-1"
+      aria-label="GameVerse home"
+    >
+
+      <svg
+        class="h-[30px]
+               w-[30px]
+               flex-none
+               text-[#ff2d4d]
+               drop-shadow-[0_0_6px_rgba(255,45,77,0.6)]"
+        aria-hidden="true"
+        viewBox="0 0 40 40"
+      >
+
+        <path
+          d="M4 34 L14 6 L20 20 L26 6 L36 34 L28 34 L20 18 L12 34Z"
+          fill="currentColor"
+        />
+
+      </svg>
+
+
+      <span
+        class="flex
+               flex-col
+               font-display
+               text-[18px]
+               font-bold
+               leading-none
+               tracking-[0.06em]"
+      >
+
+        GAME
+
+        <small
+          class="text-[9px]
+                 font-semibold
+                 tracking-[0.3em]
+                 text-[#ff2d4d]"
+        >
+          VERSE
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <!-- Support -->
+
+    <nav
+      class="flex
+             flex-col
+             gap-1"
+      aria-label="Support"
+    >
+
+      <h4
+        class="mb-1.5
+               font-body
+               text-xs
+               font-semibold
+               uppercase
+               leading-none
+               tracking-[0.15em]
+               text-[#9a9eab]"
+      >
+        Support
+      </h4>
+
+      <a
+        href="contactus.html"
+        class="inline-block
+               py-2
+               text-sm
+               text-[#f2f3f7]
+               transition
+               duration-200
+               hover:text-[#ff2d4d]"
+      >
+        Contact Us
+      </a>
+
+    </nav>
+
+
+    <!-- Copyright -->
+
+    <p
+      class="col-span-2
+             border-t
+             border-[#1d1f27]
+             pt-5
+             text-center
+             text-xs
+             text-[#9a9eab]
+             min-[600px]:text-left"
+    >
+      &copy; 2026 GameVerse. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <!-- Login / Dashboard JavaScript -->
+
   <script src="login.js" defer></script>
+
 </body>
 </html>
