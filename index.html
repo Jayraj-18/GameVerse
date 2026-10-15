@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -528,6 +528,65 @@
 
 
     <!-- =====================================================
+         VR Videos
+         ===================================================== -->
+
+    <section
+      aria-label="GameVerse VR videos"
+      class="mx-auto grid w-full max-w-[1100px]
+             grid-cols-1 gap-4
+             px-[max(16px,env(safe-area-inset-left))]
+             pr-[max(16px,env(safe-area-inset-right))]
+             pt-14 min-[768px]:grid-cols-3"
+    >
+
+      <video
+        class="aspect-video w-full rounded-lg border border-[#1d1f27]
+               bg-[#08090c] object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="GameVerse VR video 1"
+      >
+        <source src="vid1-web.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+
+      <video
+        class="aspect-video w-full rounded-lg border border-[#1d1f27]
+               bg-[#08090c] object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="GameVerse VR video 2"
+      >
+        <source src="vid2.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+
+      <video
+        class="aspect-video w-full rounded-lg border border-[#1d1f27]
+               bg-[#08090c] object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="GameVerse VR video 3"
+      >
+        <source src="vid3.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+
+    </section>
+
+
+
+    <!-- =====================================================
          Pre-Booking
          ===================================================== -->
 
@@ -765,6 +824,10 @@
                 Select a duration
               </option>
 
+              <option value="30-minutes">
+                30 Minutes
+              </option>
+
               <option value="1-hour">
                 1 Hour
               </option>
@@ -778,6 +841,14 @@
               </option>
 
             </select>
+
+            <p
+              id="booking-price"
+              aria-live="polite"
+              class="text-[13px] font-semibold text-[#ff2d4d]"
+            >
+              Select a duration to see the price.
+            </p>
 
           </div>
 
@@ -846,8 +917,8 @@
        ===================================================== -->
 
   <dialog
-    id="booking-success"
-    aria-labelledby="booking-success-title"
+    id="booking-notice"
+    aria-labelledby="booking-notice-title"
     class="w-[calc(100%-32px)] max-w-[440px]
            rounded-lg border border-[#ff2d4d]
            bg-[#0c0d11] p-0 text-[#f2f3f7]
@@ -867,16 +938,18 @@
       </p>
 
       <h2
-        id="booking-success-title"
+        id="booking-notice-title"
         class="font-display text-[clamp(28px,7vw,36px)]
                font-bold uppercase leading-none"
       >
         You're on the List!
       </h2>
 
-      <p class="text-[15px] leading-[1.6] text-[#9a9eab]">
-        Your pre-booking request has been received. GameVerse launches on
-        24 October 2026. We'll contact you to confirm your VR session.
+      <p
+        id="booking-notice-message"
+        class="text-[15px] leading-[1.6] text-[#9a9eab]"
+      >
+        Your pre-booking request has been received.
       </p>
 
       <button
@@ -891,7 +964,7 @@
                hover:-translate-y-0.5
                hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
                active:scale-[0.98]"
-        id="booking-success-close"
+        id="booking-notice-close"
         type="button"
       >
         Done
@@ -994,7 +1067,7 @@
 
 
   <!-- Booking JavaScript -->
-  <script src="booking.js" defer></script>
+  <script type="module" src="booking.js"></script>
 
 </body>
 </html>
