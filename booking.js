@@ -103,7 +103,7 @@ import {
       form.reset();
       updatePrice();
       bookingDialogTitle.textContent = "You're on the List!";
-      bookingDialogMessage.textContent = "Your pre-booking request has been received. GameVerse launches on 24 October 2026. We'll contact you to confirm your VR session.";
+      bookingDialogMessage.textContent = "Your pre-booking request has been received. GameVerse launches on 26 October 2026. We'll contact you to confirm your VR session.";
       bookingDialog.showModal();
     } catch (error) {
       if (error.code === 'booking/slot-taken') {
