@@ -15,11 +15,25 @@ import {
   const message = document.querySelector('#booking-message');
   const durationSelect = form.elements.duration;
   const priceMessage = document.querySelector('#booking-price');
-  const submitButton = form.querySelector('[type="submit"]');
+  const submitButton = document.querySelector('#prebooking-submit');
+  const submitBtnText = document.querySelector('#prebooking-btn-text');
+  const submitSpinner = document.querySelector('#prebooking-spinner');
   const bookingDialog = document.querySelector('#booking-notice');
   const bookingDialogTitle = document.querySelector('#booking-notice-title');
   const bookingDialogMessage = document.querySelector('#booking-notice-message');
   document.querySelector('#booking-notice-close').addEventListener('click', () => bookingDialog.close());
+
+  const setLoading = () => {
+    submitButton.disabled = true;
+    submitSpinner.classList.remove('hidden');
+    submitBtnText.textContent = 'Adding your booking…';
+  };
+
+  const resetLoading = () => {
+    submitButton.disabled = false;
+    submitSpinner.classList.add('hidden');
+    submitBtnText.textContent = 'Submit Pre-Booking';
+  };
 
   const prices = {
     '30-minutes': 70,
@@ -59,7 +73,7 @@ import {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     message.textContent = '';
-    submitButton.disabled = true;
+    setLoading();
 
     const date = form.elements.date.value;
     const timeslot = form.elements.timeslot.value;
@@ -117,7 +131,7 @@ import {
           : 'Could not save your booking. Check your connection and Firebase configuration, then try again.';
       }
     } finally {
-      submitButton.disabled = false;
+      resetLoading();
     }
   });
 })();

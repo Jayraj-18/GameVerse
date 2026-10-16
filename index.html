@@ -51,12 +51,36 @@
       animation: float 6s ease-in-out infinite;
     }
 
+    /* White calendar / clock picker icon */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(1) brightness(2);
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator:hover,
+    input[type="time"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+
+    /* Spin animation for submit loading state */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .btn-spinner {
+      animation: spin 0.75s linear infinite;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
       }
 
       .hero-float {
+        animation: none;
+      }
+
+      .btn-spinner {
         animation: none;
       }
 
@@ -98,6 +122,18 @@
           stroke-width="1.6"
           stroke-linecap="round"
           stroke-linejoin="round"
+        />
+      </symbol>
+
+      <!-- Spinner -->
+      <symbol id="spinner" viewBox="0 0 24 24">
+        <circle
+          cx="12" cy="12" r="10"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-dasharray="40 20"
+          stroke-linecap="round"
         />
       </symbol>
 
@@ -855,8 +891,10 @@
 
           <!-- Submit Button -->
           <button
+            id="prebooking-submit"
             type="submit"
             class="mt-1.5 min-h-12 w-full cursor-pointer
+                   inline-flex items-center justify-center gap-2.5
                    rounded border border-transparent
                    bg-gradient-to-b from-[#ff2d4d] to-[#c21234]
                    px-[22px] py-3.5
@@ -866,11 +904,20 @@
                    hover:-translate-y-0.5
                    hover:shadow-[0_0_18px_rgba(255,45,77,0.55)]
                    active:scale-[0.98]
+                   disabled:opacity-70 disabled:cursor-not-allowed
+                   disabled:hover:translate-y-0 disabled:hover:shadow-none
                    min-[600px]:col-span-2
                    min-[600px]:w-auto
                    min-[600px]:justify-self-start"
           >
-            Submit Pre-Booking
+            <svg
+              id="prebooking-spinner"
+              class="btn-spinner hidden h-4 w-4 flex-none"
+              aria-hidden="true"
+            >
+              <use href="#spinner"></use>
+            </svg>
+            <span id="prebooking-btn-text">Submit Pre-Booking</span>
           </button>
 
 
